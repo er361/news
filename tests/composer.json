@@ -1,0 +1,13 @@
+{
+    "name": "erbol/tests",
+    "authors": [
+        {
+            "name": "erbol",
+            "email": "sf7kmmr@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    }
+}

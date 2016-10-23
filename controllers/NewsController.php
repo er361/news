@@ -29,6 +29,7 @@ class NewsController extends Controller
         ];
     }
 
+
     /**
      * Lists all News models.
      * @return mixed

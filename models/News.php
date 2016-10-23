@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\behaviors\NewsBehavior;
+use app\events\NewsEvent;
 use Yii;
 
 /**
@@ -19,6 +21,13 @@ class News extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'news';
+    }
+
+    public function behaviors()
+    {
+        return[
+            NewsBehavior::className()
+        ];
     }
 
     /**

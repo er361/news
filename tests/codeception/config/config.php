@@ -14,10 +14,25 @@ return [
     ],
     'components' => [
         'db' => [
-            'dsn' => 'mysql:host=localhost;dbname=yii2_basic_tests',
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=news',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
         ],
         'mailer' => [
-            'useFileTransport' => true,
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@app/mailer',
+            'useFileTransport' => false,
+            'fileTransportPath' => '@app/mails',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'mailtrap.io',
+                'username' => '0f5cef76990c98',
+                'password' => '727e50f6f0ba45',
+                'port' => '25',
+                'encryption' => 'tls',
+                ]
         ],
         'urlManager' => [
             'showScriptName' => true,
