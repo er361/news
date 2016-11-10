@@ -3,9 +3,14 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use app\models\User;
+use yii\bootstrap\Alert;
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\jui\Dialog;
+use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -50,11 +55,21 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <?php
+        if(!Yii::$app->user->isGuest){
+            $user = User::findOne(Yii::$app->user->id);
+            foreach ($user->notifications as $notification) {
+                echo Alert::widget([
+                    'options' => ['class' => 'alert-info'],
+                    'body' => $notification->message,
+                ]);
+            }
+        }
+        ?>
         <?= $content ?>
     </div>
 </div>

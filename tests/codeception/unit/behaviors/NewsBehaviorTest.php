@@ -9,10 +9,14 @@
 namespace tests\codeception\unit\behaviors;
 
 
+use app\models\News;
 use Codeception\Specify;
 use dektrium\user\Mailer;
 use dektrium\user\models\User;
 use GuzzleHttp\Client;
+use tests\codeception\unit\models\NewsTest;
+use yii\base\Behavior;
+use yii\base\Event;
 use yii\codeception\TestCase;
 
 class NewsBehaviorTest extends TestCase
@@ -25,15 +29,20 @@ class NewsBehaviorTest extends TestCase
 //        codecept_debug($this->_users);
     }
 
-    public function testSendNotifyMessage(){
-        $this->specify('should send emails and return true', function (){
-            $this->getUsers();
-            $mailer = new Mailer();
-            foreach ($this->_users as $user){
-                $res = $mailer->sendNotifyMessage($user['email'],$user['username']);
-                verify($res)->true();
-            }
+//    public function testSendNotifyMessage(){
+//        $this->specify('should send emails and return true', function (){
+//            $this->getUsers();
+//            $mailer = new Mailer();
+//            foreach ($this->_users as $user){
+//                $res = $mailer->sendNotifyMessage($user['email'],$user['username']);
+//                verify($res)->true();
+//            }
+//        });
+//    }
+    
+    public function testEvents(){
+        $this->specify('shoud trigger events', function (){
+           Event::trigger(News::className(),News::EVENT_AFTER_INSERT);
         });
     }
-
 }
