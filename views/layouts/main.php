@@ -62,12 +62,19 @@ AppAsset::register($this);
         <?php
         if(!Yii::$app->user->isGuest){
             $user = User::findOne(Yii::$app->user->id);
+
+            //show all unseen  notifications
             foreach ($user->notifications as $notification) {
                 echo Alert::widget([
                     'options' => ['class' => 'alert-info'],
                     'body' => $notification->message,
                 ]);
+                $notification->seen = true;
+                $notification->save();
             }
+
+            //delete notification after see them
+            $user->deleteSeenNotifications();
         }
         ?>
         <?= $content ?>

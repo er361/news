@@ -23,8 +23,7 @@ return [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@app/mailer',
-            'useFileTransport' => false,
-            'fileTransportPath' => '@app/mails',
+            'useFileTransport' => true,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'mailtrap.io',

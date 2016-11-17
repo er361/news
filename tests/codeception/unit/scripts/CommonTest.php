@@ -17,7 +17,6 @@ use yii\web\Session;
 class Common extends TestCase
 {
     use Specify;
-
     public function testLoginUser(){
         $this->specify('that user has login', function (){
             $identity = User::findOne(['username' => 'er361']);
@@ -53,7 +52,7 @@ class Common extends TestCase
                 codecept_debug($item->message);
             }
         });
-        $this->clearTable();
+//        $this->clearTable();
     }
 
     public function clearTable()
