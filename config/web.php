@@ -11,11 +11,19 @@ $config = [
             'class' => 'dektrium\user\Module',
             'admins' => ['er361'],
             'modelMap' => [
-                'User' => 'app\models\User'
+                'User' => 'app\models\User',
+                'Profile' => 'app\models\Profile'
             ]
         ]
     ],
     'components' => [
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@dektrium/user/views' => '@app/views/user'
+                ]
+            ]
+        ],
         'authManager' => [
             'class' =>  'yii\rbac\DbManager'
         ],
