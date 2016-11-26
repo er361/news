@@ -58,18 +58,24 @@ class NewsBehavior extends Behavior
      */
     public function setNotify(){
         foreach ( $this->_users as $user) {
-            $notification = new Notifications();
-            $notification->message = 'Добавлена новость';
-            $notification->tag = 'add_news';
-            $notification->seen = 0;
-            $notification->user_id = $user->id;
-            $notification->save();
+            $get_notification = $user->profile->get_notification;
+            if($get_notification == 'browser' || $get_notification == 'both') {
+                $notification = new Notifications();
+                $notification->message = 'Добавлена новость';
+                $notification->tag = 'add_news';
+                $notification->seen = 0;
+                $notification->user_id = $user->id;
+                $notification->save();
+            }
         }
     }
     public function sendAll(){
         $mailer = new Mailer();
         foreach ($this->_users as $user){
-            $mailer->sendNotifyMessage($user->email,$user->username);
+            $get_notification = $user->profile->get_notification;
+            if($get_notification == 'email' || $get_notification == 'both') {
+                $mailer->sendNotifyMessage($user->email, $user->username);
+            }
         }
     }
 }

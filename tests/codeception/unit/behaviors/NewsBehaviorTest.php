@@ -29,12 +29,15 @@ class NewsBehaviorTest extends TestCase
         $this->specify('should save notification', function (){
             $this->getUsers();
             foreach ( $this->_users as $user) {
+                $get_notification = $user->profile->get_notification;
+                if($get_notification == 'browser' || $get_notification == 'both'){
                     $notification = new Notifications();
                     $notification->message = 'Добавлена новость';
                     $notification->tag = 'add_news';
                     $notification->seen = 0;
                     $notification->user_id = $user->id;
                     verify($notification->save())->true();
+                }
             }
         });
     }
@@ -44,8 +47,12 @@ class NewsBehaviorTest extends TestCase
             $this->getUsers();
             $mailer = new Mailer();
             foreach ($this->_users as $user){
-                $res = $mailer->sendNotifyMessage($user['email'],$user['username']);
-                verify($res)->true();
+                $get_notification = $user->profile->get_notification;
+                if($get_notification == 'email' || $get_notification == 'both'){
+//                    codecept_debug('i');
+                    $res = $mailer->sendNotifyMessage($user['email'],$user['username']);
+                    verify($res)->true();
+                }
             }
         });
     }
