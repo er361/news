@@ -12,7 +12,7 @@ $dataProvider = new \yii\data\ActiveDataProvider([
     ]
 ]);
 
-echo  \yii\widgets\ListView::widget([
+echo \yii\widgets\ListView::widget([
     'dataProvider' => $dataProvider,
     'itemView' => '_news',
 ]);

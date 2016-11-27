@@ -7,6 +7,9 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
+        'gridview' => [
+          'class' => 'kartik\grid\Module'
+        ],
         'user' => [
             'class' => 'dektrium\user\Module',
             'admins' => ['er361'],

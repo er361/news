@@ -69,6 +69,7 @@ class NewsBehavior extends Behavior
             }
         }
     }
+
     public function sendAll(){
         $mailer = new Mailer();
         foreach ($this->_users as $user){
