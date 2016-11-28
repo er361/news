@@ -16,7 +16,7 @@ $config = [
             'modelMap' => [
                 'User' => 'app\models\User',
                 'Profile' => 'app\models\Profile'
-            ]
+            ],
         ]
     ],
     'components' => [
