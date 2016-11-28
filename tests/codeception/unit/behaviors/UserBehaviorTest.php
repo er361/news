@@ -13,7 +13,7 @@ use dektrium\user\Mailer;
 use Symfony\Component\EventDispatcher\Event;
 use yii\codeception\TestCase;
 
-class UserChangePasswordTest extends TestCase
+class UserBehaviorTest extends TestCase
 {
     use Specify;
     public function testChangePassword(){
@@ -37,6 +37,12 @@ class UserChangePasswordTest extends TestCase
         $this->specify('send email', function (){
            $mailer = new \app\models\Mailer();
             $mailer->sendChangePasswordNotify('er361@fad.com','er361');
+        });
+    }
+    public function testSendEmailToAdmin(){
+        $this->specify('send email to admin after registration', function (){
+            $admin = User::findOne(2);
+            codecept_debug($admin);
         });
     }
 }

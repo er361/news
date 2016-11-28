@@ -19,6 +19,9 @@ class UserBehavior extends Behavior
     {
         parent::attach($owner);
         $owner->on(User::EVENT_BEFORE_UPDATE,[$this, 'changePassword']);
+        $owner->on(User::AFTER_REGISTER,function ($event){
+           $this->sendEmail(User::findOne(2));
+        });
     }
 
     public function changePassword($event){
